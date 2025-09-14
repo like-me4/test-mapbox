@@ -18,14 +18,7 @@ const MapApp = () => {
   return (
     <Map
       mapLib={import('mapbox-gl')}
-      ref={(ref) => {
-        console.log('mapRef: ', ref);
-        mapRef.current = ref;
-        console.log('mapRef.current: ', mapRef.current);
-        // if(mapRef.current) {
-        //   renderHexes(mapRef.current)
-        // }
-      }}
+      ref={mapRef}
       dragPan={true}
       dragRotate={true}          // обертання правою кнопкою або Ctrl+лівий drag
       pitchWithRotate={true}     // при rotate можна міняти pitch
@@ -35,14 +28,14 @@ const MapApp = () => {
       touchZoomRotate={true}     // pinch-to-zoom + rotate на тачпадах/мобільних
       touchPitch={true}
       keyboard={true}
-      cooperativeGestures={true}
+      cooperativeGestures={false}
       minZoom={0.5}
       maxZoom={8}
       minPitch={0}
       maxPitch={85}
       reuseMaps
       mapboxAccessToken="pk.eyJ1IjoidGhlLWhhbmRzb21lLWFuZHJldyIsImEiOiJjbWZqZ3U0eTQweWt6MmtzYWZndnoza2NhIn0.kxRwgqSyJCGP--FYNfra7w"
-      initialViewState={viewState}
+      // initialViewState={viewState}
       onMove={(e) => setViewState(e.viewState)}
       style={{width: '100vw', height: '100vh'}}
       mapStyle="mapbox://styles/mapbox/standard"
