@@ -5,6 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 // import { renderHexes } from '../../utils/renderHexes.ts';
 
 const MapApp = () => {
+  const [hexData, setHexData] = useState(null);
   const [viewState, setViewState] = useState({
     longitude: 0,
     latitude: 0,
@@ -46,6 +47,9 @@ const MapApp = () => {
       style={{width: '100vw', height: '100vh'}}
       mapStyle="mapbox://styles/mapbox/standard"
       projection={'globe'}
+      onLoad={(e) => setHexData(renderHexes(e.target))}
+      onZoomEnd={(e) => setHexData(renderHexes(e.target))}
+      onMoveEnd={(e) => setHexData(renderHexes(e.target))}
       // onLoad={(e) => {
       //   //   // Атмосфера для глобуса (необов’язково)
       //   // const map = e.target;
@@ -60,19 +64,17 @@ const MapApp = () => {
       //   //   // });
       // }}
     >
-      <Source id={'grid'} type={'geojson'} data={renderHexes(mapRef.current)}>
+      {hexData && (<Source id={'grid'} type={'geojson'} data={hexData}>
         <Layer
           id={'hex-layer-border'}
           source={'grid'}
           type={'line'}
-          paint={
-            {
+          paint={{
               'line-color': ['get', 'color'],
               'line-width': 2
-            }
-          }
+          }}
         />
-      </Source>
+      </Source>)}
       {/*<NavigationControl position="top-right" visualizePitch={true} />*/}
       <GeolocateControl position="top-right" trackUserLocation={true}/>
       <ScaleControl position="bottom-left"/>
