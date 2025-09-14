@@ -1,0 +1,81 @@
+@use 'normalize.css/normalize.css';
+@use "sass:math";
+@use "_fonts.scss";
+@use "_variables.scss";
+
+
+$menuHeight: 78px;
+$menuWidth: 680px;
+$mainColor: #a3a3ac;
+$highlightColor: #dcdceb;
+$fontSize: 14px;
+
+* {
+  box-sizing: border-box;
+  position: relative;
+}
+
+:root {
+  font-size: 18px;
+}
+
+#root{
+  width: 100vw;
+  height: 100vh;
+}
+
+html,
+body,
+#viewDiv {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: $mainColor;
+  overflow: hidden;
+}
+
+#viewDiv,
+#application {
+  position: absolute;
+  inset: 0;
+}
+
+#application {
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media screen and (width <= 745px), screen and (height <= 415px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+.esri-view-surface.esri-view-surface--touch-none{
+  &:after{
+    content: none!important;
+  }
+}
+
+.esri-ui-inner-container .esri-ui-top-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.esri-widget--button {
+  background: rgb(33, 29, 33)!important;
+  //transform: rotate(45deg);
+  border: 1px solid var(--primary_text_color)!important;
+
+}
+.esri-widget{
+  background: none!important;
+  box-shadow: none!important;
+}
+.esri-ui-inner-container .esri-ui-top-left{
+  background: none!important;
+}

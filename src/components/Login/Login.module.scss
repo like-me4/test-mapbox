@@ -1,0 +1,107 @@
+.login__modal{
+  width: 400px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-size: 100% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  opacity: 0.85;
+  &__overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 49;
+  }
+}
+
+.title{
+  font-family: var(--primary_text_font), sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 100%;
+  text-align: center;
+  color: var(--secondary_text_color);
+  margin-top: 24px;
+  margin-bottom: 70px;
+}
+form{
+  padding-top: 40px;
+  padding-bottom: 50px;
+  width: 270px;
+}
+label {
+  display: block;
+  margin: 15px 0 20px;
+  font-size: 15px;
+  span{
+    text-transform: uppercase;
+    color: var(--secondary_text_color);
+    font-family: var(--primary_text_font), sans-serif;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+}
+
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #111;
+  border: 1px solid #555;
+  color: #f0c93b;
+  border-radius: 5px;
+}
+
+.signup_prompt {
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: var(--secondary_text_color);
+
+  a {
+    color: var(--highlight_color);
+  }
+}
+
+.forgot_password {
+  text-align: right;
+  font-size: 13px;
+  margin-top: 10px;
+  color: var(--secondary_text_color);
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #c1902a;
+  border: none;
+  color: black;
+  font-weight: bold;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+button:hover {
+  background-color: var(--highlight_color);
+}

@@ -1,0 +1,78 @@
+.list{
+  position: absolute;
+  bottom: 20px;
+  right: 500px;
+  background: #a3a3ac;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #000;
+  z-index: 90;
+  .selected{
+    color: #0ff;
+  }
+  .button{
+    background: #000;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+.vignette{
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.8) 100%);
+  z-index: 10;
+}
+.controls{
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 20;
+  &_bg{
+    position: absolute;
+    top: 50%;
+    left: 19px;
+    margin-top: 40px;
+    transform: translateY(-50%);
+  }
+}
+
+.button{
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  background-position: center center;
+  &:hover{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center center;
+  }
+  img{
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+  }
+}
