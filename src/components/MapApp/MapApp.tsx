@@ -1,6 +1,5 @@
-import Map, { NavigationControl, ScaleControl, FullscreenControl, GeolocateControl, Layer } from 'react-map-gl/mapbox';
+import Map, { NavigationControl, ScaleControl, FullscreenControl, GeolocateControl, Layer, Source } from 'react-map-gl/mapbox';
 import { useRef, useState } from 'react';
-import { Source } from 'react-map-gl/mapbox-legacy';
 import { renderHexes } from '../../utils/renderHexes.ts';
 import 'mapbox-gl/dist/mapbox-gl.css';
 // import { renderHexes } from '../../utils/renderHexes.ts';
@@ -18,14 +17,14 @@ const MapApp = () => {
   return (
     <Map
       mapLib={import('mapbox-gl')}
-      // ref={(ref) => {
-      //   console.log('mapRef: ', ref);
-      //   mapRef.current = ref;
-      //   console.log('mapRef.current: ', mapRef.current);
-      //   // if(mapRef.current) {
-      //   //   renderHexes(mapRef.current)
-      //   // }
-      // }}
+      ref={(ref) => {
+        console.log('mapRef: ', ref);
+        mapRef.current = ref;
+        console.log('mapRef.current: ', mapRef.current);
+        // if(mapRef.current) {
+        //   renderHexes(mapRef.current)
+        // }
+      }}
       dragPan={true}
       dragRotate={true}          // обертання правою кнопкою або Ctrl+лівий drag
       pitchWithRotate={true}     // при rotate можна міняти pitch
