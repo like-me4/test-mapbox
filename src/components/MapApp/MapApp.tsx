@@ -2,7 +2,37 @@ import Map, { NavigationControl, ScaleControl, FullscreenControl, GeolocateContr
 import { useRef, useState } from 'react';
 import { renderHexes } from '../../utils/renderHexes.ts';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { mapServer } from '../../config';
 // import { renderHexes } from '../../utils/renderHexes.ts';
+
+
+const tileUrl = 'https://ternala.dev/mars/tile/{z}/{y}/{x}';
+const tileSize = mapServer.tileInfo.cols;                    // 512
+const maxZoom  = mapServer.tileInfo.lods[mapServer.tileInfo.lods.length - 1]!.level;      // 17
+
+
+const marsStyle: mapboxgl.Style = {
+  version: 8,
+  sources: {
+    mars: {
+      type: 'raster',
+      tiles: [tileUrl],
+      tileSize,
+      bounds: [-180, -90, 180, 90],
+      attribution: mapServer.copyrightText
+    }
+  },
+  layers: [{ id: 'mars-layer', type: 'raster', source: 'mars' }],
+  glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
+  fog: {
+    range: [0.6, 8],               // де зникає поверхня
+    color: 'rgba(255,120,60,0.05)', // помаранчевий відтінок біля горизонту
+    'horizon-blend': 0.005,          // плавний перехід
+    'high-color': 'rgba(255,120,60,0.5)',
+    'space-color': '#000',         // колір космосу (чорний)
+    'star-intensity': 0.1            // 0 – без зірок, >0 – зірки
+  }
+};
 
 const MapApp = () => {
   const [hexData, setHexData] = useState(null);
@@ -30,19 +60,27 @@ const MapApp = () => {
       keyboard={true}
       cooperativeGestures={false}
       minZoom={0.5}
-      maxZoom={8}
+      maxZoom={maxZoom}
       minPitch={0}
       maxPitch={85}
       reuseMaps
       mapboxAccessToken="pk.eyJ1IjoidGhlLWhhbmRzb21lLWFuZHJldyIsImEiOiJjbWZqZ3U0eTQweWt6MmtzYWZndnoza2NhIn0.kxRwgqSyJCGP--FYNfra7w"
-      // initialViewState={viewState}
+      initialViewState={viewState}
       onMove={(e) => setViewState(e.viewState)}
       style={{width: '100vw', height: '100vh'}}
-      mapStyle="mapbox://styles/mapbox/standard"
+      mapStyle={marsStyle}
+      // mapStyle="mapbox://styles/mapbox/light-v10"
       projection={'globe'}
-      onLoad={(e) => setHexData(renderHexes(e.target))}
+      onLoad={(e) => {
+        setHexData(renderHexes(e.target))
+        e.target.setLight({
+          position: [1, 180, 90],
+          intensity: 0.5
+        })
+      }}
       onZoomEnd={(e) => setHexData(renderHexes(e.target))}
       onMoveEnd={(e) => setHexData(renderHexes(e.target))}
+      onDragEnd={(e) => setHexData(renderHexes(e.target))}
       // onLoad={(e) => {
       //   //   // Атмосфера для глобуса (необов’язково)
       //   // const map = e.target;
@@ -64,7 +102,7 @@ const MapApp = () => {
           type={'line'}
           paint={{
               'line-color': ['get', 'color'],
-              'line-width': 2
+              'line-width': 1
           }}
         />
       </Source>)}

@@ -1,9 +1,8 @@
-import { SpatialReference } from '@arcgis/core/geometry';
 export const resolution = 2;
 export const scaleThreshold = 7000000;
-export const marsSR = new SpatialReference({ wkid: 104971 });
+// export const marsSR = new SpatialReference({ wkid: 104971 });
 
-export const highlightStyles: Record<string, __esri.SimpleFillSymbolProperties> = {
+export const highlightStyles = {
   path: {
     color: [255, 163, 32, 0],
     outline: {

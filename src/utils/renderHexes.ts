@@ -45,8 +45,8 @@ export function renderHexes(map): FeatureCollection {
   x2withBuffer = Math.min(x2withBuffer, longitudeMax);
   y1withBuffer = Math.max(y1withBuffer, latitudeMin);
   y2withBuffer = Math.min(y2withBuffer, latitudeMax);
-  console.log(`BUFF Coordinates x1:${x1withBuffer} x2:${x2withBuffer} y1:${y1withBuffer} y2:${y2withBuffer} fullView:${fullX}`);
-
+  console.log(`BUFF Coordinates x1:${x1withBuffer} x2:${x2withBuffer} y1:${y1withBuffer} y2:${y2withBuffer} fullView:${fullX}\n`);
+  console.log('fullX: ', fullX);
   const coordinates = [];
   if (fullX) {
     coordinates.push([
@@ -101,7 +101,7 @@ export function renderHexes(map): FeatureCollection {
     'type': 'FeatureCollection',
     'features': [{
       'type': 'Feature',
-      'properties': {'color': 'blue'},
+      'properties': {'color': 'rgb(197, 165, 130)'},
       'geometry': {
         'type': 'Polygon',
         'coordinates': hexBoundaries
@@ -109,7 +109,7 @@ export function renderHexes(map): FeatureCollection {
     },
       {
         'type': 'Feature',
-        'properties': {'color': 'red'},
+        'properties': {'color': 'rgb(197, 165, 130)'},
         'geometry': {
           'type': 'Polygon',
           'coordinates': pentaBoundaries
